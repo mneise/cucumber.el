@@ -76,7 +76,7 @@
 (eval-when-compile (require 'cl))
 (require 'thingatpt)
 
-(defcustom feature-cucumber-command "rake cucumber CUCUMBER_OPTS=\"{options}\" FEATURE=\"{feature}\""
+(defcustom feature-cucumber-command "rake cucumber:all --trace FEATURE=\"{feature}\""
   "set this variable to the command, which should be used to execute cucumber scenarios."
   :group 'feature-mode
   :type 'string)
