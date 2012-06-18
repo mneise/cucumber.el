@@ -76,7 +76,7 @@
 (eval-when-compile (require 'cl))
 (require 'thingatpt)
 
-(defcustom feature-cucumber-command "rake cucumber:all --trace FEATURE=\"{feature}\""
+(defcustom feature-cucumber-command "rake CUCUMBER_OPTS=\"{options}\" FEATURE=\"{feature}\""
   "set this variable to the command, which should be used to execute cucumber scenarios."
   :group 'feature-mode
   :type 'string)
@@ -388,10 +388,11 @@ are loaded on startup.  If nil, don't load snippets.")
    (list "-n" (concat "'" (feature-escape-scenario-name (feature-scenario-name-at-pos)) "'"))
    :feature-file (buffer-file-name)))
 
-(defun feature-verify-all-scenarios-in-buffer ()
+(defun feature-verify-all-scenarios-in-buffer (format profile)
   "Run all the scenarios defined in current buffer."
-  (interactive)
-  (feature-run-cucumber '() :feature-file (buffer-file-name)))
+  (interactive "sformat:
+sprofile:")
+  (feature-run-cucumber (list (format "--format %s --profile %s" format profile)) :feature-file (buffer-file-name)))
 
 
 (defun feature-verify-all-scenarios-in-project ()
